@@ -1,145 +1,75 @@
-# ContextGuard — Permission-Aware Enterprise AI Agent
+# ContextGuard — Permission-Aware Enterprise Context Reconstruction
 
-> Reconstructing trusted enterprise context without giving AI unrestricted access or decision authority.
+> A small, executable case study showing how an AI workflow can retrieve useful enterprise context without exposing documents the current user cannot access.
 
 🚧 **Ongoing — Tencent Cloud AI Singapore Hackathon 2026 · Aspire FinTech Track**
 
----
+## What is public today
 
-## Overview
+This repository now contains a deterministic minimum prototype rather than only a product concept. It demonstrates:
 
-ContextGuard is an ongoing enterprise AI project exploring how AI agents can reconstruct trusted decision context across fragmented workplace knowledge sources while respecting user permissions and keeping humans in control.
+- permission filtering before retrieval;
+- query-to-document relevance ranking;
+- evidence citations for every returned item;
+- safe handling when relevant evidence exists but is not visible;
+- an explicit boundary that leaves high-impact decisions to a human.
 
-The project focuses on a common enterprise challenge:
-
-> Important information is distributed across multiple tools, but not every employee is authorized to see the same information.
-
-Instead of building a general enterprise chatbot, ContextGuard explores how an AI system can prepare the context humans need to make better decisions.
-
----
+The prototype does **not** connect to live enterprise systems, call an LLM, implement identity-provider authentication, or prove production security. It is public evidence of the intended control flow.
 
 ## Problem
 
-In enterprise workflows, users often need to manually search across multiple systems before they can understand:
+Enterprise users often need to reconstruct what happened across several systems before making a decision. Relevant information can be fragmented, stale, and permission-sensitive. A useful assistant must retrieve enough evidence to help while preventing unauthorized context from entering the model prompt or answer.
 
-- what happened,
-- what the current status is,
-- which evidence is relevant,
-- what information is still missing,
-- and which policies or procedures apply.
-
-This becomes especially difficult when information is:
-
-- distributed across multiple workplace tools,
-- frequently updated,
-- permission-sensitive,
-- and required for high-impact decisions.
-
----
-
-## Product Direction
-
-ContextGuard is designed around five principles:
-
-### Permission-Aware AI
-
-The system should respect the current user's access rights rather than treating all retrieved enterprise information as equally visible.
-
-### Grounded Context Reconstruction
-
-AI outputs should be supported by traceable enterprise evidence rather than generated from unsupported assumptions.
-
-### Human-in-the-Loop
-
-The AI can prepare context and suggest possible next steps, but final high-impact decisions remain with humans.
-
-### Fresh Enterprise Context
-
-The system should reflect relevant updates instead of relying on stale information.
-
-### Auditable AI Workflows
-
-Important AI actions should be traceable so teams can understand how the system reached an output.
-
----
-
-## High-Level Workflow
+## Prototype workflow
 
 ```mermaid
 flowchart LR
-    A[User Request]
-    --> B[Understand Context Need]
-    --> C[Retrieve Relevant Enterprise Information]
-    --> D[Apply Access Controls]
-    --> E[Reconstruct Trusted Context]
-    --> F[Validate Output]
-    --> G[Human Decision]
+    A[User role and query] --> B[Permission filter]
+    B --> C[Deterministic relevance ranking]
+    C --> D[Context packet with citations]
+    D --> E[Validation]
+    E --> F[Human decision]
 ```
 
-The guiding product principle is:
+Run the public evaluation:
 
-> **AI prepares the decision context. Humans retain decision authority.**
+```bash
+python evaluation/run_eval.py
+```
 
----
+The command executes the frozen cases in [`evaluation/cases.json`](evaluation/cases.json) and writes [`evaluation/results/latest.json`](evaluation/results/latest.json). No API key or network connection is required.
 
-## My Role
+## Evidence
+
+- [Architecture and data flow](docs/architecture.md)
+- [Permission model and threat boundary](docs/permission-model.md)
+- [Executable prototype](prototype/contextguard.py)
+- [Synthetic document fixtures](prototype/fixtures/documents.json)
+- [Frozen evaluation cases](evaluation/cases.json)
+- [Recorded local result](evaluation/results/latest.json)
+
+The fixtures are synthetic. Evaluation results measure only the deterministic public prototype; they are not results from the private competition system.
+
+## My role
 
 **Liu Weiqi — AI / System & Evaluation Lead**
 
-My current focus includes:
+My current focus includes agent workflow design, secure context reconstruction, system integration, evaluation design, reliability testing, and failure analysis. The public prototype is a limited evidence artifact for those design concerns; it should not be read as proof that the full competition system is complete.
 
-- Agent workflow design
-- Enterprise AI system architecture
-- Secure context reconstruction
-- AI system integration
-- Evaluation framework design
-- Reliability and safety testing
-- Failure analysis
+## Current limitations
 
----
-
-## Evaluation Direction
-
-The project is being designed with evaluation as part of the product architecture rather than as a final demo-only step.
-
-Current evaluation areas include:
-
-- context reconstruction quality,
-- grounding and citation quality,
-- permission-sensitive behavior,
-- reliability under difficult inputs,
-- AI safety and guardrails,
-- and business utility compared with manual context gathering.
-
-Measured results will be added after the implementation and evaluation phases are complete.
-
----
-
-## Current Status
-
-🚧 **Active Development**
-
-This public repository provides a high-level product case study while the project is under active competition development.
-
-Detailed implementation, internal datasets, evaluation cases, permission configurations, and competition-specific technical design are currently kept private.
-
-After the project is completed, this repository will be updated with:
-
-- final architecture,
-- product screenshots,
-- demo materials,
-- measured evaluation results,
-- failure analysis,
-- and key product learnings.
-
----
+- Roles are supplied directly to the local function and are not authenticated.
+- Permissions are document-level allowlists, not row-, field-, or attribute-level policies.
+- Retrieval uses deterministic tag overlap rather than embeddings or a production search service.
+- The fixture set is deliberately small and synthetic.
+- Freshness is exposed as metadata but no connector currently refreshes documents.
+- No generative answer is produced, so grounded generation and citation faithfulness are not yet measured.
+- Human approval is represented as an output contract, not an integrated approval UI.
 
 ## Competition
 
 **Tencent Cloud AI Singapore Hackathon 2026**  
 **Aspire FinTech Track**
-
----
 
 ## Author
 
@@ -147,3 +77,4 @@ After the project is completed, this repository will be updated with:
 MSc in Artificial Intelligence for Enterprise @ NTU Singapore
 
 [LinkedIn](https://www.linkedin.com/in/liu-weiqi/)
+
