@@ -1,0 +1,43 @@
+[
+  {
+    "id": "DOC-001",
+    "title": "Payment incident timeline",
+    "summary": "Verified operational events and current recovery status for the payment incident.",
+    "tags": ["payment", "incident", "timeline", "operations"],
+    "allowed_roles": ["analyst", "manager"],
+    "updated_at": "2026-09-20"
+  },
+  {
+    "id": "DOC-002",
+    "title": "Payment exposure estimate",
+    "summary": "Finance estimate of potential monetary exposure from the payment incident.",
+    "tags": ["payment", "incident", "exposure", "finance"],
+    "allowed_roles": ["manager", "finance"],
+    "updated_at": "2026-09-21"
+  },
+  {
+    "id": "DOC-003",
+    "title": "Customer communication draft",
+    "summary": "Draft customer response describing the service interruption and next update.",
+    "tags": ["customer", "communication", "draft", "incident"],
+    "allowed_roles": ["support", "manager"],
+    "updated_at": "2026-09-22"
+  },
+  {
+    "id": "DOC-004",
+    "title": "Regulatory retention requirement",
+    "summary": "Compliance guidance for preserving incident records and approval evidence.",
+    "tags": ["regulatory", "retention", "compliance", "evidence"],
+    "allowed_roles": ["compliance", "manager"],
+    "updated_at": "2026-09-19"
+  },
+  {
+    "id": "DOC-005",
+    "title": "Public incident glossary",
+    "summary": "Definitions for incident severity, recovery, owner, and status terminology.",
+    "tags": ["incident", "glossary", "status"],
+    "allowed_roles": ["public"],
+    "updated_at": "2026-09-18"
+  }
+]
+
