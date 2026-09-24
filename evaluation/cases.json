@@ -1,0 +1,45 @@
+[
+  {
+    "id": "CG-01",
+    "roles": ["analyst"],
+    "query": "payment timeline operations",
+    "expected_document_ids": ["DOC-001"],
+    "must_not_include": ["DOC-002"]
+  },
+  {
+    "id": "CG-02",
+    "roles": ["manager"],
+    "query": "payment exposure finance",
+    "expected_document_ids": ["DOC-002", "DOC-001"],
+    "must_not_include": []
+  },
+  {
+    "id": "CG-03",
+    "roles": ["compliance"],
+    "query": "regulatory retention evidence",
+    "expected_document_ids": ["DOC-004"],
+    "must_not_include": []
+  },
+  {
+    "id": "CG-04",
+    "roles": ["analyst"],
+    "query": "regulatory retention requirement",
+    "expected_document_ids": [],
+    "must_not_include": ["DOC-004"]
+  },
+  {
+    "id": "CG-05",
+    "roles": ["support"],
+    "query": "customer communication draft",
+    "expected_document_ids": ["DOC-003"],
+    "must_not_include": []
+  },
+  {
+    "id": "CG-06",
+    "roles": ["unknown"],
+    "query": "payment exposure finance",
+    "expected_document_ids": [],
+    "must_not_include": ["DOC-001", "DOC-002"]
+  }
+]
+
