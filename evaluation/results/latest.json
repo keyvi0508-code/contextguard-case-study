@@ -1,4 +1,6 @@
 {
+  "run_date": "2026-09-24",
+  "prototype_version": "public-v1",
   "method": "deterministic local prototype; no LLM or external service",
   "case_count": 6,
   "passed": 6,
