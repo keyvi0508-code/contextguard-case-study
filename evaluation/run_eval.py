@@ -42,6 +42,8 @@ def main() -> int:
         )
 
     result = {
+        "run_date": "2026-09-24",
+        "prototype_version": "public-v1",
         "method": "deterministic local prototype; no LLM or external service",
         "case_count": len(rows),
         "passed": sum(row["passed"] for row in rows),
